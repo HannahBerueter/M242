@@ -277,6 +277,7 @@ void EnterAtomic(void);
 
 void LeaveAtomic(void);
 # 3 "C:\\Users\\hanna\\Desktop\\GIBZ\\M121\\M242\\HelloWorld\\Build\\HelloWorld.c" 2
+
 # 1 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 1 3
 # 45 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
 # 1 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay_basic.h" 1 3
@@ -449,4 +450,159 @@ extern double log(double __x) __attribute__((__const__));
 
 
 
-extern double log10(double __x) __
+extern double log10(double __x) __attribute__((__const__));
+
+
+
+
+
+extern double pow(double __x, double __y) __attribute__((__const__));
+
+
+
+
+
+
+extern int isnan(double __x) __attribute__((__const__));
+# 334 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\math.h" 3
+extern int isinf(double __x) __attribute__((__const__));
+
+
+
+
+
+
+__attribute__((__const__)) static inline int isfinite (double __x)
+{
+    unsigned char __exp;
+    __asm__ (
+ "mov	%0, %C1		\n\t"
+ "lsl	%0		\n\t"
+ "mov	%0, %D1		\n\t"
+ "rol	%0		"
+ : "=r" (__exp)
+ : "r" (__x) );
+    return __exp != 0xff;
+}
+
+
+
+
+
+
+__attribute__((__const__)) static inline double copysign (double __x, double __y)
+{
+    __asm__ (
+ "bst	%D2, 7	\n\t"
+ "bld	%D0, 7	"
+ : "=r" (__x)
+ : "0" (__x), "r" (__y) );
+    return __x;
+}
+# 377 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\math.h" 3
+extern int signbit (double __x) __attribute__((__const__));
+
+
+
+
+
+
+extern double fdim (double __x, double __y) __attribute__((__const__));
+# 393 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\math.h" 3
+extern double fma (double __x, double __y, double __z) __attribute__((__const__));
+
+
+
+
+
+
+
+extern double fmax (double __x, double __y) __attribute__((__const__));
+
+
+
+
+
+
+
+extern double fmin (double __x, double __y) __attribute__((__const__));
+
+
+
+
+
+
+extern double trunc (double __x) __attribute__((__const__));
+# 427 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\math.h" 3
+extern double round (double __x) __attribute__((__const__));
+# 440 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\math.h" 3
+extern long lround (double __x) __attribute__((__const__));
+# 454 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\math.h" 3
+extern long lrint (double __x) __attribute__((__const__));
+# 47 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 2 3
+# 86 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+static __inline__ void _delay_us(double __us) __attribute__((__always_inline__));
+static __inline__ void _delay_ms(double __ms) __attribute__((__always_inline__));
+# 165 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+void
+_delay_ms(double __ms)
+{
+ double __tmp ;
+
+
+
+ uint32_t __ticks_dc;
+ extern void __builtin_avr_delay_cycles(unsigned long);
+ __tmp = ((
+# 174 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h"
+          16000000
+# 174 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+               ) / 1e3) * __ms;
+# 184 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+  __ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+
+
+ __builtin_avr_delay_cycles(__ticks_dc);
+# 210 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+}
+# 254 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+void
+_delay_us(double __us)
+{
+ double __tmp ;
+
+
+
+ uint32_t __ticks_dc;
+ extern void __builtin_avr_delay_cycles(unsigned long);
+ __tmp = ((
+# 263 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h"
+          16000000
+# 263 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+               ) / 1e6) * __us;
+# 273 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+  __ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+
+
+ __builtin_avr_delay_cycles(__ticks_dc);
+# 299 "c:\\users\\hanna\\desktop\\gibz\\m121\\avr\\avr\\toolchain\\avr8-gnu-toolchain-win32_x86\\avr\\include\\util\\delay.h" 3
+}
+# 5 "C:\\Users\\hanna\\Desktop\\GIBZ\\M121\\M242\\HelloWorld\\Build\\HelloWorld.c" 2
+
+
+
+# 7 "C:\\Users\\hanna\\Desktop\\GIBZ\\M121\\M242\\HelloWorld\\Build\\HelloWorld.c"
+int main(void)
+{
+ Usart_Init(250000);
+
+
+ uint8_t i = 10;
+ for (; i < 20; i++)
+ {
+
+  Usart_Trace0(1);
+  _delay_ms(1000);
+ }
+ return 0;
+}

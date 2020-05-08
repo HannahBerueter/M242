@@ -1,7 +1,7 @@
 #include <avr\io.h>
 #include <avrlib.h>
+#define F_CPU 16000000
 #include <util\delay.h>
-
 #include <inttypes.h>
 
 int main(void)
